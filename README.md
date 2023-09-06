@@ -8,4 +8,3 @@ unity version 2020.3.37f1 LTS
 
 
 
-Credit to Clint Bellanger for the base human model on OpenGameArt.org
