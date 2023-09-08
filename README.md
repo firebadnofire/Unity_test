@@ -15,6 +15,5 @@ All of this code is free for you to use, modify and contribute to under the LOSS
 
 unity version 2020.3.37f1 LTS
 
-Required Unity packages: Input manager
 
 
