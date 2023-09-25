@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    CharacterController characterController;
-
-    public float speed = 6.0f;
-    public float jumpSpeed = 8.0f;
+    public float speed = 5.0f;
+    public float rotationSpeed = 120.0f;
+    public float jumpForce = 10.0f;
     public float gravity = 20.0f;
 
+    private CharacterController characterController;
     private Vector3 moveDirection = Vector3.zero;
 
     void Start()
@@ -19,27 +19,33 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        if (characterController.isGrounded)
-        {
-            // We are grounded, so recalculate
-            // move direction directly from axes
+        // Get the input axes
+        float moveForward = Input.GetAxis("Vertical");
+        float moveSideways = Input.GetAxis("Horizontal");
 
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
-            moveDirection *= speed;
+        // Calculate movement direction based on input
+        Vector3 move = transform.forward * moveForward + transform.right * moveSideways;
+        move.Normalize();
 
-            if (Input.GetButton("Jump"))
-            {
-                moveDirection.y = jumpSpeed;
-            }
-        }
+        // Move the character controller
+        moveDirection = move * speed;
 
-        // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
-        // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
-        // as an acceleration (ms^-2)
-        moveDirection.y -= gravity * Time.deltaTime;
+        // Apply gravity
+        if (!characterController.isGrounded)
+            moveDirection.y -= gravity * Time.deltaTime;
 
-        // Move the controller
+        // Jump
+        if (characterController.isGrounded && Input.GetButtonDown("Jump"))
+            moveDirection.y = jumpForce;
+
         characterController.Move(moveDirection * Time.deltaTime);
+
+        // Rotate the player based on horizontal input
+        Vector3 rotation = new Vector3(0, Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime, 0);
+        transform.Rotate(rotation);
+
+        // Rotate the camera based on vertical mouse input
+        float verticalRotation = -Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
+        Camera.main.transform.Rotate(verticalRotation, 0, 0);
     }
 }
-
