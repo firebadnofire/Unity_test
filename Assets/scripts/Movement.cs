@@ -1,51 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public float speed = 5.0f;
-    public float rotationSpeed = 120.0f;
-    public float jumpForce = 10.0f;
-    public float gravity = 20.0f;
-
-    private CharacterController characterController;
-    private Vector3 moveDirection = Vector3.zero;
+    CharacterController cha;
+    Vector3 move_speed;
+    float gravity = -9.8f;
+    float jump_speed = 0.5f;
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        cha = GetComponent<CharacterController>();
     }
 
     void Update()
     {
-        // Get the input axes
-        float moveForward = Input.GetAxis("Vertical");
-        float moveSideways = Input.GetAxis("Horizontal");
+        move_speed = new Vector3(Input.GetAxis("Horizontal"), move_speed.y + gravity * Time.deltaTime, Input.GetAxis("Vertical"));
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            move_speed.y = jump_speed;
+        }
+        cha.Move(move_speed);
 
-        // Calculate movement direction based on input
-        Vector3 move = transform.forward * moveForward + transform.right * moveSideways;
-        move.Normalize();
 
-        // Move the character controller
-        moveDirection = move * speed;
-
-        // Apply gravity
-        if (!characterController.isGrounded)
-            moveDirection.y -= gravity * Time.deltaTime;
-
-        // Jump
-        if (characterController.isGrounded && Input.GetButtonDown("Jump"))
-            moveDirection.y = jumpForce;
-
-        characterController.Move(moveDirection * Time.deltaTime);
-
-        // Rotate the player based on horizontal input
-        Vector3 rotation = new Vector3(0, Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime, 0);
-        transform.Rotate(rotation);
-
-        // Rotate the camera based on vertical mouse input
-        float verticalRotation = -Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
-        Camera.main.transform.Rotate(verticalRotation, 0, 0);
     }
 }
