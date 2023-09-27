@@ -2,25 +2,19 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    CharacterController cha;
-    Vector3 move_speed;
-    float gravity = -9.8f;
-    float jump_speed = 0.5f;
+    public CharacterController _controller;
+    public float _speed = 10;
+    public float _rotationSpeed = 180;
 
-    void Start()
+    private Vector3 rotation;
+
+    public void Update()
     {
-        cha = GetComponent<CharacterController>();
-    }
+        this.rotation = new Vector3(0, Input.GetAxisRaw("Horizontal") * _rotationSpeed * Time.deltaTime, 0);
 
-    void Update()
-    {
-        move_speed = new Vector3(Input.GetAxis("Horizontal"), move_speed.y + gravity * Time.deltaTime, Input.GetAxis("Vertical"));
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            move_speed.y = jump_speed;
-        }
-        cha.Move(move_speed);
-
-
+        Vector3 move = new Vector3(0, 0, Input.GetAxisRaw("Vertical") * Time.deltaTime);
+        move = this.transform.TransformDirection(move);
+        _controller.Move(move * _speed);
+        this.transform.Rotate(this.rotation);
     }
 }
