@@ -1,20 +1,67 @@
+using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class Movement : MonoBehaviour
 {
-    public CharacterController _controller;
-    public float _speed = 10;
-    public float _rotationSpeed = 180;
+    public float speed = 5f;
+    public float jumpForce = 10f;
+    public float gravity = 20f;
+    public float mouseSensitivity = 2f;
+    public Transform cameraTransform;
 
-    private Vector3 rotation;
+    private CharacterController characterController;
+    private Vector3 moveDirection;
+    private float pitchRotation = 0f;  // New variable to keep track of pitch rotation
 
-    public void Update()
+
+    void Start()
     {
-        this.rotation = new Vector3(0, Input.GetAxisRaw("Horizontal") * _rotationSpeed * Time.deltaTime, 0);
+        characterController = GetComponent<CharacterController>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
-        Vector3 move = new Vector3(0, 0, Input.GetAxisRaw("Vertical") * Time.deltaTime);
-        move = this.transform.TransformDirection(move);
-        _controller.Move(move * _speed);
-        this.transform.Rotate(this.rotation);
+    void Update()
+    {
+        // Mouse look
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+        transform.Rotate(Vector3.up * mouseX);
+        cameraTransform.Rotate(Vector3.right * -mouseY);
+
+        // Updated rotation clamping
+        pitchRotation -= mouseY;
+        pitchRotation = Mathf.Clamp(pitchRotation, -90f, 90f);
+        cameraTransform.localRotation = Quaternion.Euler(pitchRotation, 0, 0);
+
+        // Movement
+        float inputX = Input.GetAxis("Horizontal");
+        float inputZ = Input.GetAxis("Vertical");
+        Vector3 forward = transform.TransformDirection(Vector3.forward);
+        Vector3 right = transform.TransformDirection(Vector3.right);
+        Vector3 targetDirection = inputX * right + inputZ * forward;
+        targetDirection.Normalize();
+
+        // Jumping
+        if (characterController.isGrounded)
+        {
+            moveDirection.y = 0f;  // Reset vertical speed if on the ground
+            if (Input.GetButtonDown("Jump"))
+            {
+                moveDirection.y = jumpForce;
+            }
+        }
+
+        // Apply gravity
+        moveDirection.y -= gravity * Time.deltaTime;
+
+        // Retain full movement control in air
+        Vector3 horizontalMoveDirection = targetDirection * speed;
+        moveDirection.x = horizontalMoveDirection.x;
+        moveDirection.z = horizontalMoveDirection.z;
+
+        // Move the character
+        characterController.Move(moveDirection * Time.deltaTime);
     }
 }
