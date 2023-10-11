@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 [RequireComponent(typeof(CharacterController))]
 public class Movement : MonoBehaviour
@@ -24,6 +25,11 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        //flashlight code
+        if (Input.GetKeyDown(KeyCode.K))  // Listen for the "F" key
+        {
+            spotLight.enabled = !spotLight.enabled;  // Toggle light on/off
+        }
         // Mouse look
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;

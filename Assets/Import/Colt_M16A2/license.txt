@@ -1,0 +1,11 @@
+Model Information:
+* title:	Colt M16A2
+* source:	https://sketchfab.com/3d-models/colt-m16a2-b884cab93aad4b5a853244185e005c13
+* author:	calico16 (https://sketchfab.com/calico16)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Colt M16A2" (https://sketchfab.com/3d-models/colt-m16a2-b884cab93aad4b5a853244185e005c13) by calico16 (https://sketchfab.com/calico16) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

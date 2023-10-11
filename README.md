@@ -14,7 +14,3 @@ THIS PROJECT IS NOT TO BE TAKEN SERIOUSLY! All commits should be treated as beta
 All of this code is free for you to use, modify and contribute to under the LOSS License.
 
 unity version 2020.3.37f1 LTS
-
-Packages used:
-
-Input System
