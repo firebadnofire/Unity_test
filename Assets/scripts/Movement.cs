@@ -14,6 +14,10 @@ public class Movement : MonoBehaviour
     private CharacterController characterController;
     private Vector3 moveDirection;
     private float pitchRotation = 0f;  // New variable to keep track of pitch rotation
+    public Light spotLight;
+
+
+
 
 
     void Start()
@@ -26,7 +30,7 @@ public class Movement : MonoBehaviour
     void Update()
     {
         //flashlight code
-        if (Input.GetKeyDown(KeyCode.K))  // Listen for the "F" key
+        if (Input.GetKeyDown(KeyCode.F))  // Listen for the "F" key
         {
             spotLight.enabled = !spotLight.enabled;  // Toggle light on/off
         }
