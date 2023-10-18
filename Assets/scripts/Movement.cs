@@ -15,6 +15,8 @@ public class Movement : MonoBehaviour
     private Vector3 moveDirection;
     private float pitchRotation = 0f;  // New variable to keep track of pitch rotation
     public Light spotLight;
+    public AudioClip flashlightSound;
+    private AudioSource audioSource;
 
 
 
@@ -23,6 +25,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        audioSource = GetComponent<AudioSource>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -33,6 +36,11 @@ public class Movement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))  // Listen for the "F" key
         {
             spotLight.enabled = !spotLight.enabled;  // Toggle light on/off
+
+            if (audioSource != null && flashlightSound != null)
+            {
+                audioSource.PlayOneShot(flashlightSound);
+            }
         }
         // Mouse look
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
