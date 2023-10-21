@@ -17,11 +17,13 @@ public class Shootable : MonoBehaviour
     {
         health -= damage;  // Subtract the damage from the health
 
-        // If health drops to zero or below, destroy the object
+        // Log the current health to the console for debugging
+        Debug.Log("Health: " + health);
+
+        // If health drops to zero or below, destroy the object (make it disappear)
         if (health <= 0f)
         {
             Destroy(gameObject);
         }
     }
 }
-

@@ -17,6 +17,8 @@ public class Movement : MonoBehaviour
     public Light spotLight;
     public AudioClip flashlightSound;
     private AudioSource audioSource;
+    public AudioClip walkingSound;
+
 
 
 
@@ -61,6 +63,18 @@ public class Movement : MonoBehaviour
         Vector3 targetDirection = inputX * right + inputZ * forward;
         targetDirection.Normalize();
 
+        if ((Mathf.Abs(inputX) > 0 || Mathf.Abs(inputZ) > 0) && characterController.isGrounded)
+    {
+        if (!audioSource.isPlaying)
+        {
+            audioSource.clip = walkingSound;
+            audioSource.Play();
+        }
+    }
+    else
+    {
+        audioSource.Stop();
+    }
         // Jumping
         if (characterController.isGrounded)
         {

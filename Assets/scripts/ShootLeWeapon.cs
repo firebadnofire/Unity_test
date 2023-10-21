@@ -8,6 +8,8 @@ public class ShootLeWeapon : MonoBehaviour
     public float range = 100f; // Range of the weapon
     public Camera fpsCam; // Reference to the first-person camera
     public ParticleSystem muzzleFlash; // Reference to the muzzle flash effect
+    public AudioSource audioSource; // Reference to the AudioSource component
+    public AudioClip fireSound; // Reference to the audio clip
 
     void Update()
     {
@@ -19,16 +21,20 @@ public class ShootLeWeapon : MonoBehaviour
 
     void Shoot()
     {
-        muzzleFlash.Play(); // Play the muzzle flash effect
+        muzzleFlash.Play();  // Play the muzzle flash effect
+
+        // Play the fire sound
+        audioSource.PlayOneShot(fireSound);
 
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
-            // Check if the hit object has a damage handler and apply damage
-            DamageHandler damageHandler = hit.transform.GetComponent<DamageHandler>();
-            if (damageHandler != null)
+            // Get the Shootable script component on the hit object, if it has one
+            Shootable shootable = hit.transform.GetComponent<Shootable>();
+            if (shootable != null)
             {
-                damageHandler.TakeDamage(damage);
+                // Call OnShot on the Shootable script, passing the damage amount
+                shootable.OnShot(damage);
             }
         }
     }
