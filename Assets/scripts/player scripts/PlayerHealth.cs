@@ -39,4 +39,9 @@ public class PlayerHealth : MonoBehaviour
             }
         }
     }
+
+    private void PrintHealth()
+    {
+        Debug.Log("Player Health: " + health);
+    }
 }

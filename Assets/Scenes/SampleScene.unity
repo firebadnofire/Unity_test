@@ -934,7 +934,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1210536944}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -997,7 +997,7 @@ Transform:
   m_GameObject: {fileID: 1210536944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.26, y: 0.0019505024, z: -8.44}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 7.9409, y: 1, z: 7.021}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -6137,6 +6137,8 @@ GameObject:
   - component: {fileID: 1657737607}
   - component: {fileID: 1657737606}
   - component: {fileID: 1657737608}
+  - component: {fileID: 1657737610}
+  - component: {fileID: 1657737609}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -6319,7 +6321,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64657a31ff0466541a400261403edb17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathClip: {fileID: 8300000, guid: d9f08e1127c93804fbefc62b487290c1, type: 3}
+  deathClip: {fileID: 0}
+--- !u!54 &1657737609
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657737602}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!65 &1657737610
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657737602}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0096819, y: 1.4087387, z: 0.41682988}
+  m_Center: {x: 0.00484097, y: 0.6995272, z: 0.023612633}
 --- !u!1 &1677000652
 GameObject:
   m_ObjectHideFlags: 0
