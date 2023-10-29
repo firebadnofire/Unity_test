@@ -24,6 +24,8 @@ public class Movement : MonoBehaviour
 
 
 
+
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -31,6 +33,8 @@ public class Movement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
+
 
     void Update()
     {
@@ -84,6 +88,7 @@ public class Movement : MonoBehaviour
                 moveDirection.y = jumpForce;
             }
         }
+        
 
         // Apply gravity
         moveDirection.y -= gravity * Time.deltaTime;
@@ -96,4 +101,5 @@ public class Movement : MonoBehaviour
         // Move the character
         characterController.Move(moveDirection * Time.deltaTime);
     }
+    
 }
