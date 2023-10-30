@@ -1,39 +1,86 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;  // Import the UnityEngine.UI namespace
 
 public class ShootLeWeapon : MonoBehaviour
 {
-    public float damage = 10f; // Damage dealt by the weapon
-    public float range = 100f; // Range of the weapon
-    public Camera fpsCam; // Reference to the first-person camera
-    public ParticleSystem muzzleFlash; // Reference to the muzzle flash effect
-    public AudioSource audioSource; // Reference to the AudioSource component
-    public AudioClip fireSound; // Reference to the audio clip
+    public float damage = 10f;
+    public float range = 100f;
+    public Camera fpsCam;
+    public ParticleSystem muzzleFlash;
+    public AudioSource audioSource;
+    public AudioClip fireSound;
+    public AudioClip reloadSound;
+
+    public int maxMagazineSize = 30;
+    private int currentBullets;
+    private bool isReloading = false;
+
+    public float reloadTime = 3f;
+
+    public Text ammoText;  // Reference to the Text component
+
+    void Start()
+    {
+        currentBullets = maxMagazineSize;
+        UpdateAmmoText();  // Update the ammo text on start
+    }
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (isReloading)
+            return;
+
+        if (Input.GetButtonDown("Fire1") && currentBullets > 0)
         {
             Shoot();
         }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(Reload());
+        }
+
+        UpdateAmmoText();  // Update the ammo text every frame
+    }
+
+    void UpdateAmmoText()
+    {
+        if (currentBullets == 0)
+        {
+            ammoText.text = "RELOAD WITH R";
+        }
+        else if (currentBullets <= maxMagazineSize * 0.3f)
+        {
+            ammoText.text = "Near empty";
+        }
+        else
+        {
+            ammoText.text = currentBullets + "/" + maxMagazineSize;  // Display current bullets and max magazine size
+        }
+    }
+
+    IEnumerator Reload()
+    {
+        isReloading = true;
+        audioSource.PlayOneShot(reloadSound);
+        yield return new WaitForSeconds(reloadTime);
+        currentBullets = maxMagazineSize;
+        isReloading = false;
     }
 
     void Shoot()
     {
-        muzzleFlash.Play();  // Play the muzzle flash effect
-
-        // Play the fire sound
+        currentBullets--;
+        muzzleFlash.Play();
         audioSource.PlayOneShot(fireSound);
 
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
-            // Get the Shootable script component on the hit object, if it has one
             Shootable shootable = hit.transform.GetComponent<Shootable>();
             if (shootable != null)
             {
-                // Call OnShot on the Shootable script, passing the damage amount
                 shootable.OnShot(damage);
             }
         }
