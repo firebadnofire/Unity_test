@@ -659,7 +659,10 @@ MonoBehaviour:
   reloadSound: {fileID: 8300000, guid: 481203257e4f4884e9ae5b17d9ad5a3e, type: 3}
   maxMagazineSize: 30
   reloadTime: 1
-  ammoText: {fileID: 0}
+  ammoText: {fileID: 785236343}
+  lowAmmoText: {fileID: 785236343}
+  noAmmoText: {fileID: 1609194861}
+  lowAmmoThreshold: 10
 --- !u!82 &380710233
 AudioSource:
   m_ObjectHideFlags: 0

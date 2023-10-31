@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;  // Import the UnityEngine.UI namespace
+using UnityEngine.UI;
 
 public class ShootLeWeapon : MonoBehaviour
 {
@@ -20,11 +20,15 @@ public class ShootLeWeapon : MonoBehaviour
     public float reloadTime = 3f;
 
     public Text ammoText;  // Reference to the Text component
+    public Text lowAmmoText;  // Reference to the Text component for low ammo
+    public Text noAmmoText;  // Reference to the Text component for no ammo
+
+    public int lowAmmoThreshold = 10;  // Define a threshold for low ammo
 
     void Start()
     {
         currentBullets = maxMagazineSize;
-        UpdateAmmoText();  // Update the ammo text on start
+        UpdateAmmoText();
     }
 
     void Update()
@@ -41,22 +45,27 @@ public class ShootLeWeapon : MonoBehaviour
             StartCoroutine(Reload());
         }
 
-        UpdateAmmoText();  // Update the ammo text every frame
+        UpdateAmmoText();
     }
 
     void UpdateAmmoText()
     {
         if (currentBullets == 0)
         {
-            ammoText.text = "RELOAD WITH R";
+            ammoText.text = "";
+            noAmmoText.text = "RELOAD WITH R";
         }
-        else if (currentBullets <= maxMagazineSize * 0.3f)
+        else if (currentBullets <= lowAmmoThreshold)
         {
-            ammoText.text = "Near empty";
+            ammoText.text = "Low Ammo";
+            lowAmmoText.text = currentBullets + "/" + maxMagazineSize;
+            noAmmoText.text = "";
         }
         else
         {
-            ammoText.text = currentBullets + "/" + maxMagazineSize;  // Display current bullets and max magazine size
+            ammoText.text = currentBullets + "/" + maxMagazineSize;
+            lowAmmoText.text = "";
+            noAmmoText.text = "";
         }
     }
 
