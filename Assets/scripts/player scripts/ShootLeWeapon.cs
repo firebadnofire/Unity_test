@@ -78,39 +78,21 @@ public class ShootLeWeapon : MonoBehaviour
         isReloading = false;
     }
 
-    void Shoot()
-    {
-        currentBullets--;
-        muzzleFlash.Play();
-        audioSource.PlayOneShot(fireSound);
+void Shoot()
+{
+    currentBullets--;
+    muzzleFlash.Play();
+    audioSource.PlayOneShot(fireSound);
 
-        RaycastHit hit;
-        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+    RaycastHit hit;
+    if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
+    {
+        Damageable damageable = hit.transform.GetComponent<Damageable>();
+        if (damageable != null)
         {
-            Shootable shootable = hit.transform.GetComponent<Shootable>();
-            if (shootable != null)
-            {
-                shootable.OnShot(damage);
-            }
+            int damageInt = Mathf.RoundToInt(damage); // Convert float to int
+            damageable.TakeDamage(damageInt);
         }
     }
 }
-
-public class DamageHandler : MonoBehaviour
-{
-    public float health = 100f;
-
-    public void TakeDamage(float amount)
-    {
-        health -= amount;
-        if (health <= 0f)
-        {
-            Die();
-        }
-    }
-
-    void Die()
-    {
-        Destroy(gameObject);
-    }
 }
