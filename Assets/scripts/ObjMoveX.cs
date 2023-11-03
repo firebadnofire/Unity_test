@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ObjMove : MonoBehaviour
+public class ObjMoveX : MonoBehaviour
 {
     public float moveDistance = 5f;     // The distance the object should move.
     public float moveSpeed = 2f;       // The speed at which it moves.
