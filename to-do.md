@@ -1,13 +1,13 @@
 ### To-Do List for Unity FPS Game
 
 - [ ] **1. Concept and Design:**
-   - [ ] Define the game concept, story, and objectives.
+   - [x] Define the game concept, story, and objectives.
    - [ ] Create a game design document.
    - [ ] Design levels, characters, and weapons.
 
-- [ ] **2. Set Up Your Development Environment:**
-   - [ ] Install Unity and a code editor (e.g., Visual Studio).
-   - [ ] Create a new Unity project.
+- [x] **2. Set Up Your Development Environment:**
+   - [x] Install Unity and a code editor (e.g., VS Code).
+   - [x] Create a new Unity project.
 
 - [ ] **3. Create Game Assets:**
    - [ ] Model 3D characters and objects.
