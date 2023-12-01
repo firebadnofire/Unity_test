@@ -3,46 +3,92 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class movement : MonoBehaviour
+public class Movement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float jumpForce = 5f;
-    private Vector2 moveInput;
-    private Rigidbody rb;
+    private PlayerControls controls;
+    private InputAction jumpAction;
+    private InputAction moveAction;
+    private InputAction cameraAction;
 
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float jumpForce = 10f;
+
+    private CharacterController characterController;
+    private Vector3 playerVelocity;
+    private bool groundedPlayer;
+    private Transform playerTransform;
+
+    private Transform mainCameraTransform;
+    private Vector3 cameraOffset;
+    private float cameraRotationSpeed = 2f;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        controls = new PlayerControls();
+        jumpAction = controls.Jump.Jump;
+        moveAction = controls.Walk.Walking;
+        cameraAction = controls.Camera.CamMove;
     }
 
-    public void OnMove(InputAction.CallbackContext context)
+    private void OnEnable()
     {
-        moveInput = context.ReadValue<Vector2>();
+        controls.Enable();
     }
 
-    public void OnJump(InputAction.CallbackContext context)
+    private void OnDisable()
     {
-        if (context.performed && IsGrounded())
+        controls.Disable();
+    }
+
+    private void Start()
+    {
+        characterController = GetComponent<CharacterController>();
+        playerTransform = transform;
+
+        // Get the main camera's transform and calculate the initial camera offset
+        mainCameraTransform = Camera.main.transform;
+        cameraOffset = mainCameraTransform.position - playerTransform.position;
+    }
+
+    private void Update()
+    {
+        // Jump
+        if (groundedPlayer && jumpAction.triggered)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            playerVelocity.y += Mathf.Sqrt(jumpForce * -3.0f * Physics.gravity.y);
         }
-    }
 
-    private void FixedUpdate()
-    {
-        Vector3 movement = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * Time.fixedDeltaTime;
-        rb.MovePosition(rb.position + movement);
-    }
+        // Walk
+        Vector2 moveInput = moveAction.ReadValue<Vector2>();
+        float moveX = moveInput.x;
+        float moveY = moveInput.y;
 
-    private bool IsGrounded()
-    {
-    // Define the distance to the ground
-    float distanceToGround = 1.0f; // Adjust this value based on your needs
+        Vector3 moveDirection = new Vector3(moveX, 0f, moveY).normalized;
 
-    // Perform a Raycast downwards to check for ground
-    bool isGrounded = Physics.Raycast(transform.position, -Vector3.up, distanceToGround);
+        if (moveDirection != Vector3.zero)
+        {
+            Vector3 moveDir = playerTransform.forward * moveDirection.z + playerTransform.right * moveDirection.x;
+            characterController.Move(moveDir * moveSpeed * Time.deltaTime);
+        }
 
-    return isGrounded;
+        // Apply gravity
+        groundedPlayer = characterController.isGrounded;
+        if (!groundedPlayer)
+        {
+            playerVelocity.y += Physics.gravity.y * Time.deltaTime;
+        }
+        else
+        {
+            playerVelocity.y = 0f;
+        }
+
+        characterController.Move(playerVelocity * Time.deltaTime);
+
+        // Orbit the camera around the player
+        Vector2 cameraInput = cameraAction.ReadValue<Vector2>();
+        float cameraX = cameraInput.x * cameraRotationSpeed;
+
+        // Rotate the camera around the player's position
+        mainCameraTransform.RotateAround(playerTransform.position, Vector3.up, cameraX);
     }
 }
