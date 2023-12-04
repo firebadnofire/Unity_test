@@ -1,94 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
-    private PlayerControls controls;
-    private InputAction jumpAction;
-    private InputAction moveAction;
-    private InputAction cameraAction;
-
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float jumpForce = 10f;
-
-    private CharacterController characterController;
-    private Vector3 playerVelocity;
-    private bool groundedPlayer;
-    private Transform playerTransform;
-
-    private Transform mainCameraTransform;
-    private Vector3 cameraOffset;
-    private float cameraRotationSpeed = 2f;
+    private PlayerControls playerControls;
+    private Rigidbody playerRigidbody;
+    public float moveSpeed = 5.0f;
+    public float jumpForce = 10.0f;
+    public Transform cameraTransform;
+    public float cameraFollowSpeed = 5.0f;
 
     private void Awake()
     {
-        controls = new PlayerControls();
-        jumpAction = controls.Jump.Jump;
-        moveAction = controls.Walk.Walking;
-        cameraAction = controls.Camera.CamMove;
+        playerControls = new PlayerControls();
+        playerRigidbody = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
     {
-        controls.Enable();
+        playerControls.Enable();
     }
 
     private void OnDisable()
     {
-        controls.Disable();
-    }
-
-    private void Start()
-    {
-        characterController = GetComponent<CharacterController>();
-        playerTransform = transform;
-
-        // Get the main camera's transform and calculate the initial camera offset
-        mainCameraTransform = Camera.main.transform;
-        cameraOffset = mainCameraTransform.position - playerTransform.position;
+        playerControls.Disable();
     }
 
     private void Update()
     {
-        // Jump
-        if (groundedPlayer && jumpAction.triggered)
+        // Get the input values
+        Vector2 moveInput = playerControls.Player.Move.ReadValue<Vector2>();
+        bool jumpInput = playerControls.Player.Jump.triggered;
+
+        // Calculate movement direction based on input
+        Vector3 movementDirection = new Vector3(moveInput.x, 0.0f, moveInput.y);
+        movementDirection = cameraTransform.TransformDirection(movementDirection);
+        movementDirection.y = 0.0f; // Ensure the player doesn't move up/down.
+
+        // Move the player
+        playerRigidbody.velocity = movementDirection.normalized * moveSpeed;
+
+        // Make the player jump
+        if (jumpInput)
         {
-            playerVelocity.y += Mathf.Sqrt(jumpForce * -3.0f * Physics.gravity.y);
+            playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
-        // Walk
-        Vector2 moveInput = moveAction.ReadValue<Vector2>();
-        float moveX = moveInput.x;
-        float moveY = moveInput.y;
-
-        Vector3 moveDirection = new Vector3(moveX, 0f, moveY).normalized;
-
-        if (moveDirection != Vector3.zero)
-        {
-            Vector3 moveDir = playerTransform.forward * moveDirection.z + playerTransform.right * moveDirection.x;
-            characterController.Move(moveDir * moveSpeed * Time.deltaTime);
-        }
-
-        // Apply gravity
-        groundedPlayer = characterController.isGrounded;
-        if (!groundedPlayer)
-        {
-            playerVelocity.y += Physics.gravity.y * Time.deltaTime;
-        }
-        else
-        {
-            playerVelocity.y = 0f;
-        }
-
-        characterController.Move(playerVelocity * Time.deltaTime);
-
-        // Orbit the camera around the player
-        Vector2 cameraInput = cameraAction.ReadValue<Vector2>();
-        float cameraX = cameraInput.x * cameraRotationSpeed;
-
-        // Rotate the camera around the player's position
-        mainCameraTransform.RotateAround(playerTransform.position, Vector3.up, cameraX);
+        // Camera follow the player
+        Vector3 targetPosition = transform.position;
+        targetPosition.y = cameraTransform.position.y; // Keep the camera's Y position unchanged
+        cameraTransform.position = Vector3.Lerp(cameraTransform.position, targetPosition, cameraFollowSpeed * Time.deltaTime);
     }
 }

@@ -24,179 +24,31 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     ""name"": ""PlayerControls"",
     ""maps"": [
         {
-            ""name"": ""Jump"",
-            ""id"": ""e0842234-0b8a-4ac3-ab1e-fe4581da5195"",
-            ""actions"": [
-                {
-                    ""name"": ""Jump"",
-                    ""type"": ""Button"",
-                    ""id"": ""532b8692-dc47-46ce-be18-aab27c7be33f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""95a0fb30-7844-4632-98a5-206b459ebed0"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""9973abb4-6b84-4072-8bcb-d1ee628a287a"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Walk"",
-            ""id"": ""bb4dd69b-9341-492f-8605-c8ec241509b4"",
-            ""actions"": [
-                {
-                    ""name"": ""Walking"",
-                    ""type"": ""Value"",
-                    ""id"": ""53805bb4-72f4-415d-99d5-6c3cc1753450"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": ""KB movement"",
-                    ""id"": ""101e715f-9a6d-4606-b695-d1cd60f88aff"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Walking"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""a4f734e0-2c6a-43cb-8656-7e845435e18a"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Walking"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""7a7e48f0-0e03-4562-a62b-7edd2111bf6f"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Walking"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""5023ac3c-b1c7-4516-be25-62560694daf8"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Walking"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""d361dd52-d761-4a41-a88e-47aec8ea0b0d"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Walking"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Gamepad movement"",
-                    ""id"": ""060c0a64-76ad-4da7-a2d4-b126b1138fb2"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Walking"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""9fafa0c0-666d-4f9f-a6c4-5b8f6bc82825"",
-                    ""path"": ""<Gamepad>/leftStick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Walking"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""4d7b1c5f-622a-4bdc-bc45-0bf591bfe7c2"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Walking"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""d8854325-615b-4927-82ce-4bc54a9c56aa"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Walking"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""08dfa705-41ca-4afd-9b42-dec7da2f7be1"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Walking"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                }
-            ]
-        },
-        {
-            ""name"": ""Camera"",
-            ""id"": ""1d7989ef-0e80-4f39-a889-39b007047487"",
+            ""name"": ""Player"",
+            ""id"": ""fb24ad46-00aa-4c48-850f-c7a1f4cfe6c1"",
             ""actions"": [
                 {
                     ""name"": ""CamMove"",
                     ""type"": ""Value"",
-                    ""id"": ""9acd5004-6e1e-4e4d-b551-06ebc7e763e3"",
+                    ""id"": ""804431df-0b8a-49a7-aaf8-127dfe8b06ff"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""9d769278-7d2d-4802-b734-4a3942d0eb30"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Walking"",
+                    ""type"": ""Value"",
+                    ""id"": ""38bb04e1-e898-432a-91dd-3e00cf8d1646"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -206,7 +58,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""397dec2c-30fe-4343-817b-99c2312c2fe2"",
+                    ""id"": ""94350140-c3cf-443c-b8b1-4d04b95aec53"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -217,7 +69,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""cf311de7-4acd-4e96-aea3-64dd04294627"",
+                    ""id"": ""511c10ce-a3bf-4a7b-b082-61302c16b281"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -225,6 +77,138 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""CamMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37b27c87-042b-4ca7-863d-6dc858a7b834"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a90248e-bea9-4b82-8fd5-2c593930438e"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""KB movement"",
+                    ""id"": ""dbf618f4-ee69-408b-93ae-1631ff3724dc"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walking"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""79be85ce-d9f5-47d2-8326-363e5a2cdb73"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""bca7e972-a984-4eaa-ad11-875561843a77"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""9fa3688a-a04d-452a-81e3-c2d7fdf0091b"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""6dbebe24-7dbd-40e9-995b-a6e88d54e8da"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Gamepad movement"",
+                    ""id"": ""0356d03d-d837-4a20-9461-e4d9dd1a412f"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walking"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""233b9211-ce31-49bd-b3c4-aff8dbae7808"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""84c52cbe-49d2-4a11-a8ec-5cdfb471a03c"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""ff6284d6-fc59-45f6-99c0-680e412c10e9"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""dafebf61-2675-40e9-adf6-7babe5ee0ff5"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Walking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -259,15 +243,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     ]
 }");
-        // Jump
-        m_Jump = asset.FindActionMap("Jump", throwIfNotFound: true);
-        m_Jump_Jump = m_Jump.FindAction("Jump", throwIfNotFound: true);
-        // Walk
-        m_Walk = asset.FindActionMap("Walk", throwIfNotFound: true);
-        m_Walk_Walking = m_Walk.FindAction("Walking", throwIfNotFound: true);
-        // Camera
-        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
-        m_Camera_CamMove = m_Camera.FindAction("CamMove", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_CamMove = m_Player.FindAction("CamMove", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Walking = m_Player.FindAction("Walking", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -324,104 +304,54 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Jump
-    private readonly InputActionMap m_Jump;
-    private IJumpActions m_JumpActionsCallbackInterface;
-    private readonly InputAction m_Jump_Jump;
-    public struct JumpActions
+    // Player
+    private readonly InputActionMap m_Player;
+    private IPlayerActions m_PlayerActionsCallbackInterface;
+    private readonly InputAction m_Player_CamMove;
+    private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Walking;
+    public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
-        public JumpActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Jump => m_Wrapper.m_Jump_Jump;
-        public InputActionMap Get() { return m_Wrapper.m_Jump; }
+        public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @CamMove => m_Wrapper.m_Player_CamMove;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Walking => m_Wrapper.m_Player_Walking;
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(JumpActions set) { return set.Get(); }
-        public void SetCallbacks(IJumpActions instance)
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public void SetCallbacks(IPlayerActions instance)
         {
-            if (m_Wrapper.m_JumpActionsCallbackInterface != null)
+            if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
             {
-                @Jump.started -= m_Wrapper.m_JumpActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_JumpActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_JumpActionsCallbackInterface.OnJump;
+                @CamMove.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCamMove;
+                @CamMove.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCamMove;
+                @CamMove.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCamMove;
+                @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Walking.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWalking;
+                @Walking.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWalking;
+                @Walking.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWalking;
             }
-            m_Wrapper.m_JumpActionsCallbackInterface = instance;
+            m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
             {
+                @CamMove.started += instance.OnCamMove;
+                @CamMove.performed += instance.OnCamMove;
+                @CamMove.canceled += instance.OnCamMove;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-            }
-        }
-    }
-    public JumpActions @Jump => new JumpActions(this);
-
-    // Walk
-    private readonly InputActionMap m_Walk;
-    private IWalkActions m_WalkActionsCallbackInterface;
-    private readonly InputAction m_Walk_Walking;
-    public struct WalkActions
-    {
-        private @PlayerControls m_Wrapper;
-        public WalkActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Walking => m_Wrapper.m_Walk_Walking;
-        public InputActionMap Get() { return m_Wrapper.m_Walk; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(WalkActions set) { return set.Get(); }
-        public void SetCallbacks(IWalkActions instance)
-        {
-            if (m_Wrapper.m_WalkActionsCallbackInterface != null)
-            {
-                @Walking.started -= m_Wrapper.m_WalkActionsCallbackInterface.OnWalking;
-                @Walking.performed -= m_Wrapper.m_WalkActionsCallbackInterface.OnWalking;
-                @Walking.canceled -= m_Wrapper.m_WalkActionsCallbackInterface.OnWalking;
-            }
-            m_Wrapper.m_WalkActionsCallbackInterface = instance;
-            if (instance != null)
-            {
                 @Walking.started += instance.OnWalking;
                 @Walking.performed += instance.OnWalking;
                 @Walking.canceled += instance.OnWalking;
             }
         }
     }
-    public WalkActions @Walk => new WalkActions(this);
-
-    // Camera
-    private readonly InputActionMap m_Camera;
-    private ICameraActions m_CameraActionsCallbackInterface;
-    private readonly InputAction m_Camera_CamMove;
-    public struct CameraActions
-    {
-        private @PlayerControls m_Wrapper;
-        public CameraActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @CamMove => m_Wrapper.m_Camera_CamMove;
-        public InputActionMap Get() { return m_Wrapper.m_Camera; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
-        public void SetCallbacks(ICameraActions instance)
-        {
-            if (m_Wrapper.m_CameraActionsCallbackInterface != null)
-            {
-                @CamMove.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnCamMove;
-                @CamMove.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnCamMove;
-                @CamMove.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnCamMove;
-            }
-            m_Wrapper.m_CameraActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @CamMove.started += instance.OnCamMove;
-                @CamMove.performed += instance.OnCamMove;
-                @CamMove.canceled += instance.OnCamMove;
-            }
-        }
-    }
-    public CameraActions @Camera => new CameraActions(this);
+    public PlayerActions @Player => new PlayerActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -440,16 +370,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_MKGamepadSchemeIndex];
         }
     }
-    public interface IJumpActions
-    {
-        void OnJump(InputAction.CallbackContext context);
-    }
-    public interface IWalkActions
-    {
-        void OnWalking(InputAction.CallbackContext context);
-    }
-    public interface ICameraActions
+    public interface IPlayerActions
     {
         void OnCamMove(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnWalking(InputAction.CallbackContext context);
     }
 }
