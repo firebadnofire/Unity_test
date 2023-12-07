@@ -1,44 +1,66 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    private CharacterController controller;
-    private Vector3 playerVelocity;
-    private bool groundedPlayer;
-    private float playerSpeed = 2.0f;
-    private float jumpHeight = 1.0f;
-    private float gravityValue = -9.81f;
+    CharacterController characterController;
 
-    private void Start()
+    public float speed = 6.0f;
+    public float jumpSpeed = 8.0f;
+    public float gravity = 20.0f;
+
+    private Vector3 moveDirection = Vector3.zero;
+
+    // Add these variables for camera movement
+    public float mouseSensitivity = 2.0f;
+    private float verticalRotation = 0;
+
+
+    void Start()
     {
-        controller = gameObject.AddComponent<CharacterController>();
+        characterController = GetComponent<CharacterController>();
+
+        // Lock and hide the cursor for camera movement
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
     {
-        groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
+        if (characterController.isGrounded)
         {
-            playerVelocity.y = 0f;
+            // We are grounded, so recalculate move direction directly from axes
+
+            // Calculate the direction based on camera rotation
+            Vector3 forward = Camera.main.transform.forward;
+            Vector3 right = Camera.main.transform.right;
+
+            forward.y = 0;
+            right.y = 0;
+
+            forward.Normalize();
+            right.Normalize();
+
+            moveDirection = (forward * Input.GetAxis("Vertical") + right * Input.GetAxis("Horizontal")).normalized * speed;
+
+            if (Input.GetButton("Jump"))
+            {
+                moveDirection.y = jumpSpeed;
+            }
         }
 
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        // Apply gravity
+        moveDirection.y -= gravity * Time.deltaTime;
 
-        if (move != Vector3.zero)
-        {
-            gameObject.transform.forward = move;
-        }
+        // Move the controller
+        characterController.Move(moveDirection * Time.deltaTime);
 
-        // Changes the height position of the player..
-        if (Input.GetButtonDown("Jump") && groundedPlayer)
-        {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-        }
+        // Camera movement with the mouse
+        float horizontalRotation = Input.GetAxis("Mouse X") * mouseSensitivity;
+        verticalRotation -= Input.GetAxis("Mouse Y") * mouseSensitivity;
+        verticalRotation = Mathf.Clamp(verticalRotation, -90, 90);
+        transform.Rotate(0, horizontalRotation, 0);
+        Camera.main.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
 
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+
     }
 }
