@@ -23,7 +23,7 @@ public class Shoot : MonoBehaviour {
                                                            transform.rotation)
                 as Rigidbody;
  
-            instantiatedProjectile.velocity = transform.TransformDirection(new Vector3(0, 0, speed));
+            instantiatedProjectile.velocity = transform.TransformDirection(new Vector3(-speed, 0, 0));
  
         }
     }
