@@ -8,6 +8,8 @@ public class playercheck : MonoBehaviour
     public Text collectionText; // Reference to the Text component for displaying collection info
 
     private static playercheck instance;
+    public AudioClip collectedMaxSound;
+
 
     private void Awake()
     {
@@ -24,8 +26,31 @@ public class playercheck : MonoBehaviour
         playercheck.UpdateUI(0, maxObjects); // Use the type name to call the static method
     }
 
-    public static void UpdateUI(int collected, int max)
+public static void UpdateUI(int collected, int max)
+{
+    instance.collectionText.text = "Collected: " + collected + " of " + max + " objects";
+
+    // Check if "collected" equals "max" and update the text accordingly
+    if (collected == max)
+    
     {
-        instance.collectionText.text = "Collected: " + collected + " of " + max + " objects";
+        instance.collectionText.text = "All objects collected!";
+        PlayCollectedMaxSound();
     }
+}
+
+private static void PlayCollectedMaxSound()
+{
+    if (instance.collectedMaxSound != null)
+    {
+        // Create an AudioSource and play the collectedMaxSound
+        AudioSource audioSource = instance.gameObject.AddComponent<AudioSource>();
+        audioSource.clip = instance.collectedMaxSound;
+        audioSource.Play();
+
+        // Destroy the AudioSource component after the sound has finished playing
+        Destroy(audioSource, instance.collectedMaxSound.length);
+    }
+}
+
 }
