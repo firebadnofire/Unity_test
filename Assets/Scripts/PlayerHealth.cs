@@ -65,16 +65,26 @@ public class PlayerHealth : MonoBehaviour
 
     private void RespawnPlayer()
     {
-        // Teleport the player to (0, 0, 0)
-        transform.position = new Vector3(0, 0, 0);
+        // Check if there is a last collected object position
+        if (grabbable.GetLastCollectedObjectPosition() != Vector3.zero)
+        {
+            // Teleport the player to the last collected object's position
+            transform.position = grabbable.GetLastCollectedObjectPosition();
+        }
+        else
+        {
+            // Teleport the player to (0, 0, 0) if no last collected object position is found
+            transform.position = Vector3.zero;
+        }
 
         // Restore player controls
         if (playerController != null)
         {
-            playerController.enabled = true;
+        playerController.enabled = true;
         }
 
         // Reset the hasDied flag
         hasDied = false;
     }
+
 }
