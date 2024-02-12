@@ -9,7 +9,6 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
     public AudioSource audioSource;
     public AudioClip deathSound; // Assign your death sound clip in the Inspector
-    public Text healthText;
     public Text deathText;
 
     private bool hasDied = false; // Flag to track if the player has already died
@@ -19,7 +18,6 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         playerController = GetComponent<Controller>(); // Assuming your Controller script is attached to the same GameObject as PlayerHealth
-        UpdateHealthUI();
     }
 
     void Update()
@@ -41,8 +39,6 @@ public class PlayerHealth : MonoBehaviour
             {
                 Die();
             }
-
-            UpdateHealthUI();
         }
     }
 
@@ -103,8 +99,4 @@ public class PlayerHealth : MonoBehaviour
         deathText.text = "";
     }
 
-    private void UpdateHealthUI()
-    {
-        healthText.text = "Health: " + currentHealth.ToString();
-    }
 }
