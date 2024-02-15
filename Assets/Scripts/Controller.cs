@@ -71,4 +71,10 @@ public class Controller : MonoBehaviour
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
     }
+
+    // Public method to add Y speed to the player
+    public void AddYSpeed(float ySpeed)
+    {
+        moveDirection.y += ySpeed;
+    }
 }
