@@ -32,5 +32,4 @@ This section is dedicated to assets used that require attribution under most Cre
 
 (CC-BY 4.0) Gold Bars: <https://sketchfab.com/3d-models/fine-gold-bar-0d1ff6b3e6d045cba78889caf7f5bc6e>
 
-(CC-BY-NC 4.0) Commodore 64: <https://sketchfab.com/3d-models/commodore-64-0cd1d83a17bf4b9bb318bb49e6df229c>
 
