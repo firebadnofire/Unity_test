@@ -8,6 +8,7 @@ TagManager:
   - bullet
   - Gun
   - MovingPlatform
+  - Obstacle
   layers:
   - Default
   - TransparentFX
